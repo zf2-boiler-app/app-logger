@@ -1,0 +1,22 @@
+{
+    "name": " zf2-boiler-app/app-logger",
+    "type": "library",
+    "description": "ZF2 BoilerApp Logger module",
+    "keywords": ["Zend Framework 2","ZF2 Boiler-App","logger"],
+    "authors": [
+        {
+            "name": "Neilime",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability" : "dev",
+    "require": {
+        "zendframework/zendframework": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "BoilerAppLogger": "src"
+        },
+        "classmap" : ["Module.php"]
+    }
+}
