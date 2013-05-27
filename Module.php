@@ -8,8 +8,7 @@ class Module{
 		$oServiceManager = $oEvent->getApplication()->getServiceManager();
 
 		//Initialize Logger service
-		$oRequest = $oEvent->getRequest();
-		if($oRequest instanceof \Zend\Http\Request)$oServiceManager->get('LoggerService')->start($oRequest);
+		$oServiceManager->get('LoggerService')->initialize($oEvent);
 	}
 
 	/**

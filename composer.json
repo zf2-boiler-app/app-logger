@@ -1,7 +1,8 @@
 {
-    "name": " zf2-boiler-app/app-logger",
+    "name": "zf2-boiler-app/app-logger",
+    "license": "MIT",
     "type": "library",
-    "description": "ZF2 BoilerApp Logger module",
+    "description": "ZF2 BoilerApp Database module",
     "keywords": ["Zend Framework 2","ZF2 Boiler-App","logger"],
     "authors": [
         {
@@ -9,14 +10,60 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/zf2-boiler-app/app-logger/issues"
+    },
     "minimum-stability" : "dev",
+    "repositories":[        
+        {
+            "type": "package",
+            "package": {
+                "version": "dev-master",
+                "name": "fabiomcosta/mootools-meio-mask",
+                "source": {"url": "https://github.com/fabiomcosta/mootools-meio-mask.git","type": "git","reference": "master"}
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "version": "dev-master",
+                "name": "arian/iFrameFormRequest",
+                "source": {"url": "https://github.com/arian/iFrameFormRequest.git","type": "git","reference": "master"}
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "version": "dev-master",
+                "name": "nak5ive/Form.PasswordStrength",
+                "source": {"url": "https://github.com/nak5ive/Form.PasswordStrength.git","type": "git","reference": "master"}
+            }
+        },
+        {
+	        "type": "vcs",
+	        "url": "http://github.com/Nodge/lessphp"
+	    }
+    ],
     "require": {
-        "zendframework/zendframework": "dev-master"
+        "zendframework/zendframework": "2.3.*",
+        "zf2-boiler-app/app-db": "1.0.*",
+        "zf2-boiler-app/app-user": "1.0.*"
+    },
+    "require-dev":{
+    	"zf2-boiler-app/app-test": "1.0.*"
     },
     "autoload": {
         "psr-0": {
-            "BoilerAppLogger": "src"
+            "BoilerAppLogger": "src/"
         },
         "classmap" : ["Module.php"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+    	"process-timeout":3000
     }
 }
