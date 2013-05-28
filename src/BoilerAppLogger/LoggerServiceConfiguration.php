@@ -17,7 +17,15 @@ class LoggerServiceConfiguration extends \Zend\Stdlib\AbstractOptions{
 		return $this;
 	}
 
+	/**
+	 * @param string $sLoggerName
+	 * @param \BoilerAppLogger\Logger\LoggerInterface $oLogger
+	 * @throws \InvalidArgumentException
+	 * @return \BoilerAppLogger\LoggerServiceConfiguration
+	 */
 	public function setLogger($sLoggerName,\BoilerAppLogger\Logger\LoggerInterface $oLogger){
+		if(!is_string($sLoggerName))throw new \InvalidArgumentException('Logger name expects string, "'.gettype($sLoggerName).'" given');
+		$this->loggers[$sLoggerName] = $oLogger;
 		return $this;
 	}
 

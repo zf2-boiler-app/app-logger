@@ -16,8 +16,9 @@ class MvcLogger extends \BoilerAppLogger\Logger\AbstractLogger{
 				->setLogRequestMethod($oRequest->getMethod())
 				->setLogRequestUri($oRequest->getUriString())
 				->setLogRequestHeaders($oRequest->getHeaders()->toArray());
-			$oEvent->getEventManager()->attach(\Zend\Mvc\MvcEvent::EVENT_ROUTE,array($this,'logMvcAction'));
-			$oEvent->getEventManager()->attach(array(\Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR,\Zend\Mvc\MvcEvent::EVENT_RENDER_ERROR),array($this,'logError'));
+			$oEventManager = $oEvent->getApplication()->getEventManager();
+			$oEventManager->attach(\Zend\Mvc\MvcEvent::EVENT_ROUTE,array($this,'logMvcAction'));
+			$oEventManager->attach(array(\Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR,\Zend\Mvc\MvcEvent::EVENT_RENDER_ERROR),array($this,'logError'));
 		}
 	}
 
@@ -25,7 +26,7 @@ class MvcLogger extends \BoilerAppLogger\Logger\AbstractLogger{
 	 * @param \Zend\Mvc\MvcEvent $oEvent
 	 * @return \BoilerAppLogger\Logger\MvcLogger
 	 */
-	protected function logMvcAction(\Zend\Mvc\MvcEvent $oEvent){
+	public function logMvcAction(\Zend\Mvc\MvcEvent $oEvent){
 		return $this;
 	}
 
@@ -33,7 +34,7 @@ class MvcLogger extends \BoilerAppLogger\Logger\AbstractLogger{
 	 * @param \Zend\Mvc\MvcEvent $oEvent
 	 * @return \BoilerAppLogger\Logger\MvcLogger
 	 */
-	protected function logError(\Zend\Mvc\MvcEvent $oEvent){
+	public function logError(\Zend\Mvc\MvcEvent $oEvent){
 		$oLogError = new \BoilerAppLogger\Entity\LogErrorEntity();
 		$oLogError->setLogErrorLog($this->getCurrentLog());
 		return $this;

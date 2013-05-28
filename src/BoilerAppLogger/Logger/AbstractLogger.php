@@ -10,6 +10,6 @@ abstract class AbstractLogger implements \BoilerAppLogger\Logger\LoggerInterface
 	 * @return \BoilerAppLogger\Logger\AbstractLogger
 	 */
 	public function initialize(\Zend\Mvc\MvcEvent $oEvent,\BoilerAppLogger\Entity\LogEntity $oCurrentLog){
-		return $this->setCurrentEvent($oEvent)->setCurrentLog($sCurrentLoggerId);
+		return $this->setCurrentEvent($oEvent)->setCurrentLog($oCurrentLog);
 	}
 }

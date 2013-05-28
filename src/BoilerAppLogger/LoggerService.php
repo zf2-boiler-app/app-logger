@@ -38,15 +38,12 @@ class LoggerService{
 	 */
 	public function initialize(\Zend\Mvc\MvcEvent $oEvent,\BoilerAppUser\Entity\UserEntity $oAuthenticatedUser = null){
 		//Create log
-		$oLog = new \BoilerAppLogger\Entity\LogEntity();
-		if($oAuthenticatedUser)$oLog->setLogUser($oAuthenticatedUser);
-
-		//Define current log entity
-		$this->setCurrentLog($oLog);
+		$this->setCurrentLog(new \BoilerAppLogger\Entity\LogEntity());
+		if($oAuthenticatedUser)$this->getCurrentLog()->setLogUser($oAuthenticatedUser);
 
 		//Initialize loggers
 		foreach($this->getConfiguration()->getLoggers() as $oLogger){
-			$oLogger->initialize($oEvent,$oLog);
+			$oLogger->initialize($oEvent,$this->getCurrentLog());
 		}
 		return $this;
 	}

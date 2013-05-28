@@ -2,7 +2,7 @@
     "name": "zf2-boiler-app/app-logger",
     "license": "MIT",
     "type": "library",
-    "description": "ZF2 BoilerApp Database module",
+    "description": "ZF2 BoilerApp Logger module",
     "keywords": ["Zend Framework 2","ZF2 Boiler-App","logger"],
     "authors": [
         {
