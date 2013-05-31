@@ -12,11 +12,23 @@ class LoggerService{
 	protected $currentLog;
 
 	/**
+	 * @var \BoilerAppLogger\Repository\LogRepository
+	 */
+	protected $logRepository;
+
+	/**
 	 * Constructor
 	 * @param \BoilerAppLogger\LoggerServiceConfiguration $oConfiguration
 	 */
 	private function __construct(\BoilerAppLogger\LoggerServiceConfiguration $oConfiguration = null){
 		if($oConfiguration)$this->setConfiguration($oConfiguration);
+	}
+
+	/**
+	 * Desctructor
+	 */
+	public function __destruct(){
+		if($this->hasCurrentLog())$this->getLogRepository()->create($this->getCurrentLog());
 	}
 
 	/**
@@ -68,7 +80,6 @@ class LoggerService{
 
 	/**
 	 * @param \BoilerAppLogger\Entity\LogEntity $oCurrentLog
-	 * @throws \InvalidArgumentException
 	 * @return \BoilerAppLogger\LoggerService
 	 */
 	protected function setCurrentLog(\BoilerAppLogger\Entity\LogEntity $oCurrentLog){
@@ -81,7 +92,32 @@ class LoggerService{
 	 * @return \BoilerAppLogger\Entity\LogEntity
 	 */
 	public function getCurrentLog(){
-		if($this->currentLog instanceof \BoilerAppLogger\Entity\LogEntity)return $this->currentLog;
+		if($this->hasCurrentLog())return $this->currentLog;
 		throw new \LogicException('Current log entity is undefined');
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function hasCurrentLog(){
+		return $this->currentLog instanceof \BoilerAppLogger\Entity\LogEntity;
+	}
+
+	/**
+	 * @param \BoilerAppLogger\Repository\LogRepository $oLogRepository
+	 * @return \BoilerAppLogger\LoggerService
+	 */
+	public function setLogRepository(\BoilerAppLogger\Repository\LogRepository $oLogRepository){
+		$this->logRepository = $oLogRepository;
+		return $this;
+	}
+
+	/**
+	 * @throws \LogicException
+	 * @return \BoilerAppLogger\Repository\LogRepository
+	 */
+	public function getLogRepository(){
+		if($this->logRepository instanceof \BoilerAppLogger\Repository\LogRepository)return $this->logRepository;
+		throw new \LogicException('Log repository is undefined');
 	}
 }

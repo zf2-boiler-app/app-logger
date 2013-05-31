@@ -1,3 +1,3 @@
 <?php
-namespace BoilerAppLog\Repository;
+namespace BoilerAppLogger\Repository;
 class LogRepository extends \BoilerAppDb\Repository\AbstractEntityRepository{}

@@ -53,21 +53,4 @@ trait LoggerTrait{
 		if($this->currentLog instanceof \BoilerAppLogger\Entity\LogEntity)return $this->currentLog;
 		throw new \LogicException('Current log entity is undefined');
 	}
-
-	/**
-	 * @param \BoilerAppLogger\Logger\Adapter\LoggerAdapterInterface $oLoggerAdapter
-	 * @return \BoilerAppLogger\Logger\LoggerTrait
-	 */
-	public function setLoggerAdapter(\BoilerAppLogger\Logger\Adapter\LoggerAdapterInterface $oLoggerAdapter){
-		$this->loggerAdapter = $oLoggerAdapter;
-		return $this;
-	}
-
-	/**
-	 * @return \BoilerAppLogger\Logger\Adapter\LoggerAdapterInterface
-	*/
-	public function getLoggerAdapter(){
-		if($this->loggerAdapter instanceof \BoilerAppLogger\Logger\Adapter\LoggerAdapterInterface)return $this->loggerAdapter;
-		throw new \LogicException('Logger adapter is undefined');
-	}
 }

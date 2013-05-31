@@ -10,5 +10,5 @@ return array(
     'BoilerAppLogger\Logger\MvcLogger'                             => __DIR__ . '/src/BoilerAppLogger/Logger/MvcLogger.php',
     'BoilerAppLogger\LoggerService'                                => __DIR__ . '/src/BoilerAppLogger/LoggerService.php',
     'BoilerAppLogger\LoggerServiceConfiguration'                   => __DIR__ . '/src/BoilerAppLogger/LoggerServiceConfiguration.php',
-    'BoilerAppLog\Repository\LogRepository'                        => __DIR__ . '/src/BoilerAppLogger/Repository/LogRepository.php',
+    'BoilerAppLogger\Repository\LogRepository'                     => __DIR__ . '/src/BoilerAppLogger/Repository/LogRepository.php',
 );

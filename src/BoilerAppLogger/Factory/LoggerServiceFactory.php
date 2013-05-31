@@ -42,6 +42,7 @@ class LoggerServiceFactory implements \Zend\ServiceManager\FactoryInterface{
         	}
         	$aConfiguration['loggers'] = $aLoggers;
         }
-        return \BoilerAppLogger\LoggerService::factory($aConfiguration);
+        $oLoggerService = \BoilerAppLogger\LoggerService::factory($aConfiguration);
+        return $oLoggerService->setLogRepository($oServiceLocator->get('\BoilerAppLogger\Repository\LogRepository'));
     }
 }

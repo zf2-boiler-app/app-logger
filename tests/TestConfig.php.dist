@@ -1,6 +1,11 @@
 <?php
 return array(
 	'modules' => array(
+		'DoctrineModule',
+		'DoctrineORMModule',
+		'BoilerAppDb',
+		'BoilerAppAccessControl',
+		'BoilerAppUser',
 		'BoilerAppLogger'
 	),
 	'module_listener_options' => array(
