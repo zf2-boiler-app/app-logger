@@ -25,13 +25,6 @@ class LoggerService{
 	}
 
 	/**
-	 * Desctructor
-	 */
-	public function __destruct(){
-		if($this->hasCurrentLog())$this->getLogRepository()->create($this->getCurrentLog());
-	}
-
-	/**
 	 * Instantiate a Logger service
 	 * @param array|Traversable $aOptions
 	 * @throws \InvalidArgumentException
@@ -49,13 +42,21 @@ class LoggerService{
 	 * @return \BoilerAppLogger\LoggerService
 	 */
 	public function initialize(\Zend\Mvc\MvcEvent $oEvent,\BoilerAppUser\Entity\UserEntity $oAuthenticatedUser = null){
-		//Create log
-		$this->setCurrentLog(new \BoilerAppLogger\Entity\LogEntity());
-		if($oAuthenticatedUser)$this->getCurrentLog()->setLogUser($oAuthenticatedUser);
+		if(!(($oRequest = $oEvent->getRequest()) instanceof \Zend\Http\Request))return $this;
+
+		//Create and persist log entity
+		$oCurrentLog = new \BoilerAppLogger\Entity\LogEntity();
+		if($oAuthenticatedUser)$oCurrentLog->setLogUser($oAuthenticatedUser);
+		$this->setCurrentLog($this->getLogRepository()->create(
+			$oCurrentLog
+			->setLogRequestMethod($oRequest->getMethod())
+			->setLogRequestUri($oRequest->getUriString())
+			->setLogRequestHeaders($oRequest->getHeaders()->toArray())
+		));
 
 		//Initialize loggers
 		foreach($this->getConfiguration()->getLoggers() as $oLogger){
-			$oLogger->initialize($oEvent,$this->getCurrentLog());
+			$oLogger->setLogRepository($this->getLogRepository())->initialize($oEvent,$this->getCurrentLog());
 		}
 		return $this;
 	}

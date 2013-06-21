@@ -8,10 +8,15 @@ class LoggerServiceConfiguration extends \Zend\Stdlib\AbstractOptions{
 
 	/**
 	 * @param array $aLoggers
+	 * @throws \InvalidArgumentException
 	 * @return \BoilerAppLogger\LoggerServiceConfiguration
 	 */
 	public function setLoggers(array $aLoggers){
 		foreach($aLoggers as $sLoggerName => $oLogger){
+			if(!($oLogger instanceof \BoilerAppLogger\Logger\LoggerInterface))throw new \InvalidArgumentException(sprintf(
+				'Logger "%s" should be a instanceof \BoilerAppLogger\Logger\LoggerInterface, "%s" given',
+				$sLoggerName,is_object($oLogger)?get_class($oLogger):gettype($oLogger)
+			));
 			$this->setLogger($sLoggerName, $oLogger);
 		}
 		return $this;

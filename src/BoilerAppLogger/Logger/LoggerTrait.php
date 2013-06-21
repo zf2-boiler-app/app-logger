@@ -13,9 +13,9 @@ trait LoggerTrait{
 	protected $currentLog;
 
 	/**
-	 * @var \BoilerAppLogger\Logger\Adapter\AdapterInterface
+	 * @var \BoilerAppLogger\Repository\LogRepository
 	 */
-	protected $loggerAdapter;
+	protected $logRepository;
 
 	/**
 	 * @param \Zend\Mvc\MvcEvent $oEvent
@@ -38,7 +38,7 @@ trait LoggerTrait{
 	/**
 	 * @param \BoilerAppLogger\Entity\LogEntity $oCurrentLog
 	 * @throws \InvalidArgumentException
-	 * @return \BoilerAppLogger\LoggerService
+	 * @return \BoilerAppLogger\Logger\LoggerTrait
 	 */
 	protected function setCurrentLog(\BoilerAppLogger\Entity\LogEntity $oCurrentLog){
 		$this->currentLog = $oCurrentLog;
@@ -52,5 +52,23 @@ trait LoggerTrait{
 	public function getCurrentLog(){
 		if($this->currentLog instanceof \BoilerAppLogger\Entity\LogEntity)return $this->currentLog;
 		throw new \LogicException('Current log entity is undefined');
+	}
+
+	/**
+	 * @param \BoilerAppLogger\Repository\LogRepository $oLogRepository
+	 * @return \BoilerAppLogger\Logger\LoggerTrait
+	 */
+	public function setLogRepository(\BoilerAppLogger\Repository\LogRepository $oLogRepository){
+		$this->logRepository = $oLogRepository;
+		return $this;
+	}
+
+	/**
+	 * @throws \LogicException
+	 * @return \BoilerAppLogger\Repository\LogRepository
+	 */
+	public function getLogRepository(){
+		if($this->logRepository instanceof \BoilerAppLogger\Repository\LogRepository)return $this->logRepository;
+		throw new \LogicException('Log repository is undefined');
 	}
 }

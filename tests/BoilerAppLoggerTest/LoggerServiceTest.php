@@ -44,4 +44,18 @@ class LoggerServiceTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractTestCase
 		$oGetCurrentLog->setAccessible(true);
 		$oGetCurrentLog->invokeArgs($this->loggerService,array());
 	}
+
+	/**
+	 * @expectedException LogicException
+	 */
+	public function testGetLogRepositoryUnset(){
+		$oReflectionClass = new \ReflectionClass('\BoilerAppLogger\LoggerService');
+		$oLogRepository = $oReflectionClass->getProperty('logRepository');
+		$oLogRepository->setAccessible(true);
+		$oLogRepository->setValue($this->loggerService, null);
+
+		$oGetLogRepository = $oReflectionClass->getMethod('getLogRepository');
+		$oGetLogRepository->setAccessible(true);
+		$oGetLogRepository->invokeArgs($this->loggerService,array());
+	}
 }

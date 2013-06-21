@@ -3,12 +3,13 @@ return array(
 	'doctrine' => include 'module.config.doctrine.php',
 	'BoilerAppLogger' => array(
 		'loggers' => array(
-			'Mvc' => 'BoilerAppLogger\Logger\MvcLogger'
+			'Mvc' => 'MvcLogger'
 		)
 	),
 	'service_manager' => array(
 		'factories' => array(
-			'LoggerService' => '\BoilerAppLogger\Factory\LoggerServiceFactory'
+			'LoggerService' => '\BoilerAppLogger\Factory\LoggerServiceFactory',
+			'MvcLogger' => '\BoilerAppLogger\Factory\MvcLoggerFactory'
 		)
 	)
 );

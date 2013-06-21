@@ -7,4 +7,15 @@ interface LoggerInterface{
 	 * @return \BoilerAppLogger\Logger\LoggerInterface
 	 */
 	public function initialize(\Zend\Mvc\MvcEvent $oEvent, \BoilerAppLogger\Entity\LogEntity $oCurrentLog);
+
+	/**
+	 * @param \BoilerAppLogger\Repository\LogRepository $oLogRepository
+	 * @return \BoilerAppLogger\Logger\LoggerInterface
+	 */
+	public function setLogRepository(\BoilerAppLogger\Repository\LogRepository $oLogRepository);
+
+	/**
+	 * @return \BoilerAppLogger\Repository\LogRepository
+	 */
+	public function getLogRepository();
 }

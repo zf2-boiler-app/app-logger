@@ -3,12 +3,15 @@
 return array(
     'BoilerAppLogger\Doctrine\DBAL\Types\LogRequestMethodEnumType' => __DIR__ . '/src/BoilerAppLogger/Doctrine/DBAL/Types/LogRequestMethodEnum.php',
     'BoilerAppLogger\Entity\LogEntity'                             => __DIR__ . '/src/BoilerAppLogger/Entity/LogEntity.php',
+    'BoilerAppLogger\Entity\LogErrorEntity'                        => __DIR__ . '/src/BoilerAppLogger/Entity/LogErrorEntity.php',
     'BoilerAppLogger\Factory\LoggerServiceFactory'                 => __DIR__ . '/src/BoilerAppLogger/Factory/LoggerServiceFactory.php',
+    'BoilerAppLogger\Factory\MVcLoggerFactory'                     => __DIR__ . '/src/BoilerAppLogger/Factory/MvcLoggerFactory.php',
     'BoilerAppLogger\Logger\AbstractLogger'                        => __DIR__ . '/src/BoilerAppLogger/Logger/AbstractLogger.php',
     'BoilerAppLogger\Logger\LoggerInterface'                       => __DIR__ . '/src/BoilerAppLogger/Logger/LoggerInterface.php',
     'BoilerAppLogger\Logger\LoggerTrait'                           => __DIR__ . '/src/BoilerAppLogger/Logger/LoggerTrait.php',
     'BoilerAppLogger\Logger\MvcLogger'                             => __DIR__ . '/src/BoilerAppLogger/Logger/MvcLogger.php',
     'BoilerAppLogger\LoggerService'                                => __DIR__ . '/src/BoilerAppLogger/LoggerService.php',
     'BoilerAppLogger\LoggerServiceConfiguration'                   => __DIR__ . '/src/BoilerAppLogger/LoggerServiceConfiguration.php',
+    'BoilerAppLogger\Repository\LogErrorRepository'                => __DIR__ . '/src/BoilerAppLogger/Repository/LogErrorRepository.php',
     'BoilerAppLogger\Repository\LogRepository'                     => __DIR__ . '/src/BoilerAppLogger/Repository/LogRepository.php',
 );

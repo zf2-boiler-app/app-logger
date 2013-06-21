@@ -6,6 +6,7 @@ namespace BoilerAppLogger\Entity;
  * @\Doctrine\ORM\Mapping\Table(name="log")
  */
 class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
+
 	/**
 	 * @var int
 	 * @\Doctrine\ORM\Mapping\Id
@@ -16,7 +17,7 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 
 	/**
 	 * @var string
-	 * @\Doctrine\ORM\Mapping\Column(type="string",unique=true,length=255)
+	 * @\Doctrine\ORM\Mapping\Column(type="string")
 	 */
 	protected $log_request_uri;
 
@@ -33,11 +34,39 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	protected $log_request_headers;
 
 	/**
+	 * @var string
+	 * @\Doctrine\ORM\Mapping\Column(type="string",nullable=true)
+	 */
+	protected $log_matched_route_name;
+
+	/**
+	 * @var string
+	 * @\Doctrine\ORM\Mapping\Column(type="string",nullable=true)
+	 */
+	protected $log_controller_name;
+
+	/**
+	 * @var string
+	 * @\Doctrine\ORM\Mapping\Column(type="string",nullable=true)
+	 */
+	protected $log_action_name;
+
+	/**
+	 * @var \Doctrine\ORM\PersistentCollection
+	 * @\Doctrine\ORM\Mapping\OneToMany(targetEntity="BoilerAppLogger\Entity\LogErrorEntity", mappedBy="log_error_log")
+	 */
+	protected $log_log_errors;
+
+	/**
 	 * @var \BoilerAppUser\Entity\UserEntity
-	 * @\Doctrine\ORM\Mapping\ManyToOne(targetEntity="BoilerAppUser\Entity\UserEntity")
-     * @\Doctrine\ORM\Mapping\JoinColumn(name="log_user_id", referencedColumnName="user_id")
+	 * @\Doctrine\ORM\Mapping\ManyToOne(targetEntity="\BoilerAppUser\Entity\UserEntity")
+	 * @\Doctrine\ORM\Mapping\JoinColumn(name="log_user_id", referencedColumnName="user_id")
 	 */
 	protected $log_user;
+
+	public function __construct(){
+		$this->log_log_errors = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
 	/**
 	 * @return int
@@ -61,7 +90,6 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	public function getLogRequestUri(){
 		return $this->log_request_uri;
 	}
-
 
 	/**
 	 * @param string $sRequestMethod
@@ -93,6 +121,61 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	 */
 	public function getLogRequestHeaders(){
 		return $this->log_request_headers;
+	}
+
+	/**
+	 * @param string $sMatchedRouteName
+	 * @return \BoilerAppLogger\Entity\LogEntity
+	 */
+	public function setLogMatchedRouteName($sMatchedRouteName){
+		$this->log_matched_route_name = $sMatchedRouteName;
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getLogMatchedRouteName(){
+		return $this->log_matched_route_name;
+	}
+
+	/**
+	 * @param string $sControllerName
+	 * @return \BoilerAppLogger\Entity\LogEntity
+	 */
+	public function setLogControllerName($sControllerName){
+		$this->log_controller_name = $sControllerName;
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getLogControllerName(){
+		return $this->log_controller_name;
+	}
+
+	/**
+	 * @param string $sActionName
+	 * @return \BoilerAppLogger\Entity\LogEntity
+	 */
+	public function setLogActionName($sActionName){
+		$this->log_action_name = $sActionName;
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getLogActionName(){
+		return $this->log_action_name;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\PersistentCollection
+	 */
+	public function getLogLogErrors(){
+		return $this->log_log_errors;
 	}
 
 	/**

@@ -5,7 +5,7 @@ class LoggerServiceFactory implements \Zend\ServiceManager\FactoryInterface{
      * @see \Zend\ServiceManager\FactoryInterface::createService()
 	 * @param \Zend\ServiceManager\ServiceLocatorInterface $oServiceLocator
 	 * @throws \LogicException
-     * @return BoilerAppLogger\LoggerService
+     * @return \BoilerAppLogger\LoggerService
      */
 	public function createService(\Zend\ServiceManager\ServiceLocatorInterface $oServiceLocator){
         $aConfiguration = $oServiceLocator->get('Config');
@@ -31,7 +31,7 @@ class LoggerServiceFactory implements \Zend\ServiceManager\FactoryInterface{
 	        			join(', ',array_keys($oLogger)),gettype($sLoggerName)
 					));
 
-	        		$sLoggerType = $oLogger['logger'];
+	        		$sLoggerType = $oLogger['type'];
 	        		unset($oLogger['type']);
 
 	        		if(class_exists($sLoggerType))$oLogger = new $sLoggerType($oServiceLocator,$oLogger);
