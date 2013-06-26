@@ -12,7 +12,7 @@ class TestControllerTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractHttpCon
 		$this->assertEquals(1, $oLog->getLogId());
 		$this->assertEquals('http:/', $oLog->getLogRequestUri());
 		$this->assertEquals(\Zend\Http\Request::METHOD_GET,$oLog->getLogRequestMethod());
-		$this->assertEquals(array(),$oLog->getLogRequestHeaders());
+		$this->assertInstanceOf('\Zend\Http\Headers',$oLog->getLogRequestHeaders());
 		$this->assertNull($oLog->getLogMatchedRouteName());
 		$this->assertNull($oLog->getLogControllerName());
 		$this->assertNull($oLog->getLogActionName());
@@ -50,7 +50,7 @@ class TestControllerTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractHttpCon
 		$this->assertEquals(1, $oLog->getLogId());
 		$this->assertEquals('http:/', $oLog->getLogRequestUri());
 		$this->assertEquals(\Zend\Http\Request::METHOD_GET,$oLog->getLogRequestMethod());
-		$this->assertEquals(array(),$oLog->getLogRequestHeaders());
+		$this->assertInstanceOf('\Zend\Http\Headers',$oLog->getLogRequestHeaders());
 		$this->assertEquals('Test',$oLog->getLogMatchedRouteName());
 		$this->assertEquals('BoilerAppLoggerTest\Controller\Test',$oLog->getLogControllerName());
 		$this->assertEquals('test',$oLog->getLogActionName());
@@ -70,7 +70,7 @@ class TestControllerTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractHttpCon
 		$this->assertInstanceOf('\BoilerAppLogger\Entity\LogEntity', $oLog = current($aLogs));
 		$this->assertEquals(1, $oLog->getLogId());
 		$this->assertEquals(\Zend\Http\Request::METHOD_GET,$oLog->getLogRequestMethod());
-		$this->assertEquals(array(),$oLog->getLogRequestHeaders());
+		$this->assertInstanceOf('\Zend\Http\Headers',$oLog->getLogRequestHeaders());
 		$this->assertNull($oLog->getLogUser());
 
 		//Assert Log has LogError

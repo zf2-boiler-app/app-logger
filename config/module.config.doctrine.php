@@ -15,7 +15,8 @@ return array(
 	'configuration' => array(
 		'orm_default' => array(
 			'types' => array(
-				'logrequestmethodenum' => 'BoilerAppLogger\Doctrine\DBAL\Types\LogRequestMethodEnumType'
+				'logrequestmethodenum' => 'BoilerAppLogger\Doctrine\DBAL\Types\LogRequestMethodEnumType',
+				'requestheaders' => 'BoilerAppLogger\Doctrine\DBAL\Types\RequestHeadersType'
 			)
 		)
 	)

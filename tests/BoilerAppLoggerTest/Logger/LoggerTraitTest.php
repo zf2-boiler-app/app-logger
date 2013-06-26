@@ -28,4 +28,11 @@ class LoggerTraitTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractTestCase{
 	public function testGetCurrentLogUnset(){
 		$this->loggerTraitObject->getCurrentLog();
 	}
+
+	/**
+	 * @expectedException LogicException
+	 */
+	public function testLogRepositoryUnset(){
+		$this->loggerTraitObject->getLogRepository();
+	}
 }

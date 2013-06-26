@@ -51,7 +51,7 @@ class LoggerService{
 			$oCurrentLog
 			->setLogRequestMethod($oRequest->getMethod())
 			->setLogRequestUri($oRequest->getUriString())
-			->setLogRequestHeaders($oRequest->getHeaders()->toArray())
+			->setLogRequestHeaders($oRequest->getHeaders())
 		));
 
 		//Initialize loggers

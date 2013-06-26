@@ -28,8 +28,8 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	protected $log_request_method;
 
 	/**
-	 * @var array
-	 * @\Doctrine\ORM\Mapping\Column(type="json_array")
+	 * @var \Zend\Http\Headers
+	 * @\Doctrine\ORM\Mapping\Column(type="requestheaders")
 	 */
 	protected $log_request_headers;
 
@@ -108,16 +108,16 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	}
 
 	/**
-	 * @param array $aRequestHeaders
+	 * @param \Zend\Http\Headers $oRequestHeaders
 	 * @return \BoilerAppLogger\Entity\LogEntity
 	 */
-	public function setLogRequestHeaders(array $aRequestHeaders){
-		$this->log_request_headers = $aRequestHeaders;
+	public function setLogRequestHeaders(\Zend\Http\Headers $oRequestHeaders){
+		$this->log_request_headers = $oRequestHeaders;
 		return $this;
 	}
 
 	/**
-	 * @return array
+	 * @return \Zend\Http\Headers
 	 */
 	public function getLogRequestHeaders(){
 		return $this->log_request_headers;
