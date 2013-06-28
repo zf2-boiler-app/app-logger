@@ -45,12 +45,12 @@
 	    }
     ],
     "require": {
-        "zendframework/zendframework": "2.3.*",
-        "zf2-boiler-app/app-db": "1.0.*",
-        "zf2-boiler-app/app-user": "1.0.*"
+        "zendframework/zendframework": "dev-master",
+        "zf2-boiler-app/app-db": "dev-master",
+        "zf2-boiler-app/app-user": "dev-master"
     },
     "require-dev":{
-    	"zf2-boiler-app/app-test": "1.0.*"
+    	"zf2-boiler-app/app-test": "dev-master"
     },
     "autoload": {
         "psr-0": {

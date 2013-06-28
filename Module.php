@@ -6,10 +6,12 @@ class Module{
 	 */
 	public function onBootstrap($oEvent){
 		$oServiceManager = $oEvent->getApplication()->getServiceManager();
+
 		//Initialize Logger service
 		$oServiceManager->get('LoggerService')->initialize(
 			$oEvent,
-			$oServiceManager->get('AccessControlAuthenticationService')->hasIdentity()?$oServiceManager->get('AccessControlService')->getAuthenticatedAuthAccess()->getAuthAccessUser():null
+			$oServiceManager->get('SessionManager')->getId(),
+			$oServiceManager->get('AccessControlAuthenticationService')->hasIdentity()?$oServiceManager->get('AccessControlService')->getAuthenticatedAuthAccess():null
 		);
 	}
 

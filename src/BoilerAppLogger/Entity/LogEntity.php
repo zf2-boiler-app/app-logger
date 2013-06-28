@@ -28,6 +28,18 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	protected $log_request_method;
 
 	/**
+	 * @var string
+	 * @\Doctrine\ORM\Mapping\Column(type="string",nullable=true)
+	 */
+	protected $log_session_id;
+
+	/**
+	 * @var string
+	 * @\Doctrine\ORM\Mapping\Column(type="ipaddress",nullable=true)
+	 */
+	protected $log_ip_address;
+
+	/**
 	 * @var \Zend\Http\Headers
 	 * @\Doctrine\ORM\Mapping\Column(type="requestheaders")
 	 */
@@ -58,12 +70,15 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	protected $log_log_errors;
 
 	/**
-	 * @var \BoilerAppUser\Entity\UserEntity
-	 * @\Doctrine\ORM\Mapping\ManyToOne(targetEntity="\BoilerAppUser\Entity\UserEntity")
-	 * @\Doctrine\ORM\Mapping\JoinColumn(name="log_user_id", referencedColumnName="user_id")
+	 * @var \BoilerAppAccessControl\Entity\AuthAccessEntity
+	 * @\Doctrine\ORM\Mapping\ManyToOne(targetEntity="\BoilerAppAccessControl\Entity\AuthAccessEntity")
+	 * @\Doctrine\ORM\Mapping\JoinColumn(name="log_auth_access_id", referencedColumnName="auth_access_id")
 	 */
-	protected $log_user;
+	protected $log_auth_access;
 
+	/**
+	 * Constructor
+	 */
 	public function __construct(){
 		$this->log_log_errors = new \Doctrine\Common\Collections\ArrayCollection();
 	}
@@ -105,6 +120,38 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	 */
 	public function getLogRequestMethod(){
 		return $this->log_request_method;
+	}
+
+	/**
+	 * @param string $sSessionId
+	 * @return \BoilerAppLogger\Entity\LogEntity
+	 */
+	public function setLogSessionId($sSessionId){
+		$this->log_session_id = $sSessionId;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLogSessionId(){
+		return $this->log_session_id;
+	}
+
+	/**
+	 * @param string $sIPAddress
+	 * @return \BoilerAppLogger\Entity\LogEntity
+	 */
+	public function setLogIPAddress($sIPAddress){
+		$this->log_ip_address = $sIPAddress;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLogIPAddress(){
+		return $this->log_ip_address;
 	}
 
 	/**
@@ -179,18 +226,18 @@ class LogEntity extends \BoilerAppDb\Entity\AbstractEntity{
 	}
 
 	/**
-	 * @param \BoilerAppUser\Entity\UserEntity $oUser
+	 * @param \BoilerAppAccessControl\Entity\AuthAccessEntity $oAuthAccess
 	 * @return \BoilerAppLogger\Entity\LogEntity
 	 */
-	public function setLogUser(\BoilerAppUser\Entity\UserEntity $oUser){
-		$this->log_user = $oUser;
+	public function setLogAuthAccess(\BoilerAppAccessControl\Entity\AuthAccessEntity $oAuthAccess){
+		$this->log_auth_access = $oAuthAccess;
 		return $this;
 	}
 
 	/**
-	 * @return \BoilerAppUser\Entity\UserEntity
+	 * @return \BoilerAppAccessControl\Entity\AuthAccessEntity
 	 */
-	public function getLogUser(){
-		return $this->log_user;
+	public function getLogAuthAccess(){
+		return $this->log_auth_access;
 	}
 }

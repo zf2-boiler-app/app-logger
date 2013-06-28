@@ -38,19 +38,27 @@ class LoggerService{
 
 	/**
 	 * @param \Zend\Mvc\MvcEvent $oEvent
-	 * @param \BoilerAppUser\Entity\UserEntity $oAuthenticatedUser
+	 * @param string $sSessionId
+	 * @param \BoilerAppAccessControl\Entity\AuthAccessEntity $oAuthenticatedAuthAccess
 	 * @return \BoilerAppLogger\LoggerService
 	 */
-	public function initialize(\Zend\Mvc\MvcEvent $oEvent,\BoilerAppUser\Entity\UserEntity $oAuthenticatedUser = null){
+	public function initialize(\Zend\Mvc\MvcEvent $oEvent,$sSessionId, \BoilerAppAccessControl\Entity\AuthAccessEntity $oAuthenticatedAuthAccess = null){
 		if(!(($oRequest = $oEvent->getRequest()) instanceof \Zend\Http\Request))return $this;
 
 		//Create and persist log entity
 		$oCurrentLog = new \BoilerAppLogger\Entity\LogEntity();
-		if($oAuthenticatedUser)$oCurrentLog->setLogUser($oAuthenticatedUser);
+		if($oAuthenticatedAuthAccess)$oCurrentLog->setLogAuthAccess($oAuthenticatedAuthAccess);
+
+		//Retrieve remote address
+		$oRemoteAddress = new \Zend\Http\PhpEnvironment\RemoteAddress();
+
+		if($oAuthenticatedAuthAccess)$oCurrentLog->setLogAuthAccess($oAuthenticatedAuthAccess);
 		$this->setCurrentLog($this->getLogRepository()->create(
 			$oCurrentLog
 			->setLogRequestMethod($oRequest->getMethod())
 			->setLogRequestUri($oRequest->getUriString())
+			->setLogSessionId($sSessionId?:null)
+			->setLogIPAddress($oRemoteAddress->getIpAddress()?:null)
 			->setLogRequestHeaders($oRequest->getHeaders())
 		));
 

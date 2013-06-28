@@ -22,7 +22,7 @@ class RequestHeadersTypeTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractTes
 	}
 
 	/**
-	 * @expectedException InvalidArgumentException
+	 * @expectedException \Doctrine\DBAL\Types\ConversionException
 	 */
 	public function testConvertToPHPValueWithWrongValue(){
 		$this->requestHeadersType->convertToPHPValue('false', $this->getServiceManager()->get('doctrine.connection.orm_default')->getDatabasePlatform());

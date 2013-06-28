@@ -12,11 +12,13 @@ class TestControllerTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractHttpCon
 		$this->assertEquals(1, $oLog->getLogId());
 		$this->assertEquals('http:/', $oLog->getLogRequestUri());
 		$this->assertEquals(\Zend\Http\Request::METHOD_GET,$oLog->getLogRequestMethod());
+		$this->assertNull($oLog->getLogIPAddress());
+		$this->assertNull($oLog->getLogSessionId());
 		$this->assertInstanceOf('\Zend\Http\Headers',$oLog->getLogRequestHeaders());
 		$this->assertNull($oLog->getLogMatchedRouteName());
 		$this->assertNull($oLog->getLogControllerName());
 		$this->assertNull($oLog->getLogActionName());
-		$this->assertNull($oLog->getLogUser());
+		$this->assertNull($oLog->getLogAuthAccess());
 
 		//Assert Log has LogError
 		$this->assertInstanceOf('\Doctrine\ORM\PersistentCollection', $oLogErrors = $oLog->getLogLogErrors());
@@ -54,7 +56,7 @@ class TestControllerTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractHttpCon
 		$this->assertEquals('Test',$oLog->getLogMatchedRouteName());
 		$this->assertEquals('BoilerAppLoggerTest\Controller\Test',$oLog->getLogControllerName());
 		$this->assertEquals('test',$oLog->getLogActionName());
-		$this->assertInstanceOf('\BoilerAppUser\Entity\UserEntity',$oLog->getLogUser());
+		$this->assertInstanceOf('\BoilerAppAccessControl\Entity\AuthAccessEntity',$oLog->getLogAuthAccess());
 
 		//Assert Log has no LogError
 		$this->assertInstanceOf('\Doctrine\ORM\PersistentCollection', $oLogErrors = $oLog->getLogLogErrors());
@@ -71,7 +73,7 @@ class TestControllerTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractHttpCon
 		$this->assertEquals(1, $oLog->getLogId());
 		$this->assertEquals(\Zend\Http\Request::METHOD_GET,$oLog->getLogRequestMethod());
 		$this->assertInstanceOf('\Zend\Http\Headers',$oLog->getLogRequestHeaders());
-		$this->assertNull($oLog->getLogUser());
+		$this->assertNull($oLog->getLogAuthAccess());
 
 		//Assert Log has LogError
 		$this->assertInstanceOf('\Doctrine\ORM\PersistentCollection', $oLogErrors = $oLog->getLogLogErrors());
@@ -80,7 +82,7 @@ class TestControllerTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractHttpCon
 		$this->assertEquals(1,$oLogError->getLogErrorId());
 		$this->assertEquals('Test exception',$oLogError->getLogErrorMessage());
 		$this->assertEquals(0,$oLogError->getLogErrorCode());
-		$this->assertStringEndsWith('BoilerAppLoggerTest\Controller\TestController.php', $oLogError->getLogErrorFile());
+		$this->assertStringEndsWith('BoilerAppLoggerTest'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'TestController.php', $oLogError->getLogErrorFile());
 		$this->assertEquals(9,$oLogError->getLogErrorLine());
 		$this->assertContains('BoilerAppLoggerTest\Controller\TestController->exceptionAction()',$oLogError->getLogErrorTrace());
 		$this->assertEquals($oLog,$oLogError->getLogErrorLog());

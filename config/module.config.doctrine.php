@@ -16,7 +16,8 @@ return array(
 		'orm_default' => array(
 			'types' => array(
 				'logrequestmethodenum' => 'BoilerAppLogger\Doctrine\DBAL\Types\LogRequestMethodEnumType',
-				'requestheaders' => 'BoilerAppLogger\Doctrine\DBAL\Types\RequestHeadersType'
+				'requestheaders' => 'BoilerAppLogger\Doctrine\DBAL\Types\RequestHeadersType',
+				'ipaddress' => 'BoilerAppLogger\Doctrine\DBAL\Types\IPAddressType'
 			)
 		)
 	)
