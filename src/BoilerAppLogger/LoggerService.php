@@ -38,11 +38,11 @@ class LoggerService{
 
 	/**
 	 * @param \Zend\Mvc\MvcEvent $oEvent
-	 * @param string $sSessionId
 	 * @param \BoilerAppAccessControl\Entity\AuthAccessEntity $oAuthenticatedAuthAccess
+	 * @param string $sSessionId
 	 * @return \BoilerAppLogger\LoggerService
 	 */
-	public function initialize(\Zend\Mvc\MvcEvent $oEvent,$sSessionId, \BoilerAppAccessControl\Entity\AuthAccessEntity $oAuthenticatedAuthAccess = null){
+	public function initialize(\Zend\Mvc\MvcEvent $oEvent,\BoilerAppAccessControl\Entity\AuthAccessEntity $oAuthenticatedAuthAccess = null,$sSessionId){
 		if(!(($oRequest = $oEvent->getRequest()) instanceof \Zend\Http\Request))return $this;
 
 		//Create and persist log entity
