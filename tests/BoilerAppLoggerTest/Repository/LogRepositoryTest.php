@@ -25,7 +25,8 @@ class LogRepositoryTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractDoctrine
 		$this->getServiceManager()->get('AuthenticationService')->authenticate(
 			\BoilerAppAccessControl\Service\AuthenticationService::LOCAL_AUTHENTICATION,
 			'valid@test.com',
-			'valid-credential'
+			'valid-credential',
+			false
 		);
 
 		$this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection',$oLatestActivities = $this->logRepository->getLatestActivityLogs($this->getServiceManager()->get('AccessControlService')->getAuthenticatedAuthAccess()));

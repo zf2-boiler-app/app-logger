@@ -41,7 +41,8 @@ class TestControllerTest extends \BoilerAppTest\PHPUnit\TestCase\AbstractHttpCon
 		$this->getServiceManager()->get('AuthenticationService')->authenticate(
 			\BoilerAppAccessControl\Service\AuthenticationService::LOCAL_AUTHENTICATION,
 			'valid@test.com',
-			'valid-credential'
+			'valid-credential',
+			false
 		);
 
 		$this->dispatch('/test');
